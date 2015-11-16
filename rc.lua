@@ -111,17 +111,17 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 --
 -- Battery widget
-batterywidget = wibox.widget.textbox()    
-batterywidget:set_text(" | Battery | ")    
-batterywidgettimer = timer({ timeout = 5 })    
-batterywidgettimer:connect_signal("timeout",    
-  function()    
-    fh = assert(io.popen("acpi | cut -d, -f 2,3 -", "r"))    
-    batterywidget:set_text(" |" .. fh:read("*l") .. " | ")    
-    fh:close()    
-  end    
-)    
-batterywidgettimer:start()
+-- batterywidget = wibox.widget.textbox()    
+-- batterywidget:set_text(" | Battery | ")    
+-- batterywidgettimer = timer({ timeout = 5 })    
+-- batterywidgettimer:connect_signal("timeout",    
+--   function()    
+--     fh = assert(io.popen("acpi | cut -d, -f 2,3 -", "r"))    
+--     batterywidget:set_text(" |" .. fh:read("*l") .. " | ")    
+--     fh:close()    
+--   end    
+-- )    
+-- batterywidgettimer:start()
 
 -- {{{ Wibox
 -- Create a textclock widget
@@ -245,9 +245,27 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey, "Shift" }, "p", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause") end),
 
 
-    awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
-    awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
-    awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
+    -- awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
+    -- Cycle through all displays
+    awful.key({ modkey,           }, "Left",   function ()
+							for screen = 1, screen.count() do
+								awful.tag.viewprev(screen)
+							end
+						end),
+    -- awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
+    -- Cycle through all displays
+    awful.key({ modkey,           }, "Right",   function ()
+							for screen = 1, screen.count() do
+								awful.tag.viewnext(screen)
+							end
+						end),
+    -- awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
+    -- Cycle through all displays
+    awful.key({ modkey,           }, "Escape",   function ()
+							for screen = 1, screen.count() do
+								awful.tag.history.restore(screen)
+							end
+						end),
 
     awful.key({ modkey,           }, "j",
         function ()
