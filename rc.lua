@@ -1,3 +1,5 @@
+require("volume")
+
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -110,18 +112,6 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 --
--- Battery widget
--- batterywidget = wibox.widget.textbox()    
--- batterywidget:set_text(" | Battery | ")    
--- batterywidgettimer = timer({ timeout = 5 })    
--- batterywidgettimer:connect_signal("timeout",    
---   function()    
---     fh = assert(io.popen("acpi | cut -d, -f 2,3 -", "r"))    
---     batterywidget:set_text(" |" .. fh:read("*l") .. " | ")    
---     fh:close()    
---   end    
--- )    
--- batterywidgettimer:start()
 
 -- {{{ Wibox
 -- Create a textclock widget
@@ -218,6 +208,7 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(mytextclock)
+    right_layout:add(volume_widget)
     right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
@@ -475,7 +466,6 @@ client.connect_signal("manage", function (c, startup)
         right_layout:add(awful.titlebar.widget.stickybutton(c))
         right_layout:add(awful.titlebar.widget.ontopbutton(c))
         right_layout:add(awful.titlebar.widget.closebutton(c))
-	right_layout:add(batterywidgettimer)
 
         -- The title goes in the middle
         local middle_layout = wibox.layout.flex.horizontal()

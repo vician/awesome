@@ -73,7 +73,8 @@ theme.titlebar_maximized_button_focus_inactive  = "/home/sansom/.config/awesome/
 theme.titlebar_maximized_button_normal_active = "/home/sansom/.config/awesome/themes/default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active  = "/home/sansom/.config/awesome/themes/default/titlebar/maximized_focus_active.png"
 
-theme.wallpaper = "/home/sansom/.config/awesome/themes/default/background.png"
+-- theme.wallpaper = "/home/sansom/.config/awesome/themes/default/background.png"
+theme.wallpaper = "/home/sansom/Pictures/wallpaper.jpg"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = "/home/sansom/.config/awesome/themes/default/layouts/fairhw.png"
