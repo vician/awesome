@@ -255,6 +255,7 @@ globalkeys = awful.util.table.join(
    -- Edited my changes
    awful.key({ modkey, "Shift" }, "s", function () awful.util.spawn("slock") end),
    awful.key({ modkey, "Shift" }, "p", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause") end),
+    awful.key({ modkey , "Control"},"c",  function () kbdcfg.switch() end),
 
 
     -- awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
