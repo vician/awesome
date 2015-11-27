@@ -87,7 +87,7 @@ tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
     -- tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[2])
-    tags[s] = awful.tag({ "1-dash", "2-chat", "3-mail", "4-web", "5-notes", "6-term", "7-term", "8-term", "9-media"}, s, layouts[2])
+    tags[s] = awful.tag({ "1-dash", "2-chat", "3-mail", "4-web", "5-notes", "6-term", "7-term", "8-term", "9-media"}, s, layouts[6])
 end
 -- }}}
 
@@ -244,6 +244,7 @@ end
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
+    awful.button({ }, 2, function (c) c:kill() end),
     awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
@@ -422,7 +423,8 @@ awful.rules.rules = {
                      focus = awful.client.focus.filter,
                      raise = true,
                      keys = clientkeys,
-                     buttons = clientbuttons } },
+                     buttons = clientbuttons,
+                     size_hints_honor = false } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
     { rule = { class = "pinentry" },
